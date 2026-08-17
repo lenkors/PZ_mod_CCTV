@@ -50,7 +50,6 @@ local function CCTV_OnFillInventoryContextMenu(playerNum, context, items)
     end
 end
 
--- Правильная регистрация ивента через :Add и с правильным именем ивента
 if Events and Events.OnFillInventoryObjectContextMenu then
     Events.OnFillInventoryObjectContextMenu.Add(CCTV_OnFillInventoryContextMenu)
 end
