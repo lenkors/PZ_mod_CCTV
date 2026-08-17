@@ -1,0 +1,29 @@
+module CCTV
+{
+    imports
+    {
+        Base
+    }
+
+    item CameraItem
+    {
+        Type = Normal,
+        ItemType = base:normal,
+        DisplayName = CCTV Camera,
+        Icon = OutDoorCamera,
+        Weight = 1.0,
+        DisplayCategory = Misc,
+        CantEat = true,
+    }
+
+    item RepeaterItem
+    {
+        Type = Normal,
+        ItemType = base:normal,
+        DisplayName = CCTV Repeater,
+        Icon = CameraSignalRepeater,
+        Weight = 2.0,
+        DisplayCategory = Misc,
+        CantEat = true,
+    }
+}

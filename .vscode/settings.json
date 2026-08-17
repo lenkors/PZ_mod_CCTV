@@ -1,0 +1,11 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "**/media/lua/shared/Translate/*/Moveables.json"
+      ],
+      "url": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Moveables.schema.json",
+      "name": "PZ Moveables translation schema"
+    }
+  ]
+}
