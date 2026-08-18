@@ -2,6 +2,7 @@ require "ISUI/ISUIElement"
 require "CCTV_i18n"
 
 CCTV_UI = ISUIElement:derive("CCTV_UI")
+CCTV_UI.FOG_REVEAL_RADIUS = 15 -- дальность раскрытия тумана войны вокруг камеры (в тайлах)
 
 function CCTV_UI:new(x, y, width, height, cameraList, playerNum)
     local o = ISUIElement:new(x, y, width, height)
@@ -53,18 +54,33 @@ function CCTV_UI:switchCamera(index)
                 self.origAlpha = player:getAlpha()
             end
 
-            player:setInvisible(true)
-            player:setGhostMode(true)
-            player:setCollidable(false)
-            player:setAlpha(0.0)
+            player:teleportTo(cam.x, cam.y, cam.z)
+            self:applySpectatorState(player)
 
-            player:setX(cam.x)
-            player:setY(cam.y)
-            player:setZ(cam.z)
+            self:revealFogAroundCamera(cam)
+        end
+    end
+end
 
-            local square = getCell():getOrCreateGridSquare(cam.x, cam.y, cam.z)
+
+function CCTV_UI:applySpectatorState(player)
+    player:setInvisible(true)
+    player:setGhostMode(true)
+    player:setCollidable(false)
+    player:setAlpha(0.0)
+    player:setBlockMovement(true)
+    -- player.doRenderShadow = false
+end
+
+function CCTV_UI:revealFogAroundCamera(cam)
+    local playerIndex = self.playerNum or 0
+    local cell = getCell()
+    local radius = CCTV_UI.FOG_REVEAL_RADIUS
+    for dx = -radius, radius do
+        for dy = -radius, radius do
+            local square = cell:getGridSquare(cam.x + dx, cam.y + dy, cam.z)
             if square then
-                player:setCurrent(square)
+                square:setIsSeen(playerIndex, true)
             end
         end
     end
@@ -83,8 +99,13 @@ function CCTV_UI:onNextCam()
 end
 
 function CCTV_UI:prerender()
-    self:drawRect(0, 0, self.width, self.height, 0.2, 0, 0, 0)
-    
+    local player = getSpecificPlayer(self.playerNum or 0)
+    if player then
+        self:applySpectatorState(player)
+    end
+
+    self:drawRect(0, 0, self.width, self.height, 0.15, 0, 0, 0)
+
     local activeCam = self.cameraList[self.currentCamIndex]
     if activeCam then
         local camName = activeCam.name or ("Camera " .. self.currentCamIndex)
@@ -97,8 +118,12 @@ function CCTV_UI:prerender()
     else
         self:drawText(CCTV_i18n.ERROR_NOT_FOUND, 40, 40, 1, 0, 0, 1, UIFont.Medium)
     end
-    
-    self:drawRectBorder(20, 20, self.width - 40, self.height - 40, 1, 0, 1, 0)
+
+    local margin = 8
+    local thickness = 4
+    for i = 0, thickness - 1 do
+        self:drawRectBorder(margin + i, margin + i, self.width - (margin + i) * 2, self.height - (margin + i) * 2, 1, 0, 1, 0)
+    end
 end
 
 function CCTV_UI:clearCameraTarget()
@@ -113,20 +138,14 @@ function CCTV_UI:onClose()
     local player = getSpecificPlayer(self.playerNum or 0)
     if player then
         if self.origX then
-            player:setX(self.origX)
-            player:setY(self.origY)
-            player:setZ(self.origZ)
-
-            local origSquare = getCell():getOrCreateGridSquare(self.origX, self.origY, self.origZ)
-            if origSquare then
-                player:setCurrent(origSquare)
-            end
+            player:teleportTo(self.origX, self.origY, self.origZ)
         end
 
         player:setCollidable(true)
         player:setBlockMovement(false)
         player:setInvisible(false)
         player:setGhostMode(false)
+        -- player.doRenderShadow = true
 
         if self.origAlpha then
             player:setAlpha(self.origAlpha)

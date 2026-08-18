@@ -20,12 +20,7 @@ end
 
 local function CCTV_OnFillWorldObjectContextMenu(playerNum, context, worldobjects)
     for _, obj in ipairs(worldobjects) do
-        -- Проверяем спрайт телевизора безопасно без instanceOf
-        local sprite = obj and obj.getSprite and obj:getSprite()
-        local spriteName = sprite and sprite:getName() or ""
-
-        -- Если объект имеет имя IsoTelevision ИЛИ его спрайт содержит "tv"
-        if (obj.getObjectName and obj:getObjectName() == "Television") or string.find(spriteName:lower(), "tv") then
+        if obj and obj.getObjectName and obj:getObjectName() == "Television" then
             local square = obj:getSquare()
             if square then
                 context:addOption(

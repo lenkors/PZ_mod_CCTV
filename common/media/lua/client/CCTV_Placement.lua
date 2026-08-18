@@ -1,6 +1,25 @@
 require "CCTV_Manager"
 require "CCTV_i18n"
 
+local function hasAdjacentWallOrFence(square)
+    local x, y, z = square:getX(), square:getY(), square:getZ()
+    local cell = getCell()
+
+    local neighbors = {
+        cell:getGridSquare(x, y - 1, z), -- север
+        cell:getGridSquare(x, y + 1, z), -- юг
+        cell:getGridSquare(x - 1, y, z), -- запад
+        cell:getGridSquare(x + 1, y, z), -- восток
+    }
+
+    for _, neighbor in ipairs(neighbors) do
+        if neighbor and square:isWallTo(neighbor) then
+            return true
+        end
+    end
+    return false
+end
+
 local function placeDevice(playerNum, item, isCamera)
     local player = getSpecificPlayer(playerNum)
     if not player then return end
@@ -9,13 +28,26 @@ local function placeDevice(playerNum, item, isCamera)
     if not square then return end
 
     local x, y, z = square:getX(), square:getY(), square:getZ()
-    local id = "cctv_" .. x .. "_" .. y .. "_" .. z
 
     if isCamera then
+        -- Камеру можно вешать только на стену или забор
+        if not hasAdjacentWallOrFence(square) then
+            player:Say(CCTV_i18n.CAMERA_NEEDS_WALL)
+            return
+        end
+
+        -- Не даём ставить камеры кучей в одном месте
+        if CCTV_Manager.isCameraTooClose(x, y) then
+            player:Say(CCTV_i18n.CAMERA_TOO_CLOSE)
+            return
+        end
+
+        local id = CCTV_Manager.generateId("cctv_cam")
         local camName = CCTV_i18n.CAMERA .. " " .. x .. ":" .. y
         CCTV_Manager.registerCamera(id, camName, x, y, z)
         player:Say(CCTV_i18n.CAMERA_WAS_PLANTED .. ": " .. camName)
     else
+        local id = CCTV_Manager.generateId("cctv_rep")
         CCTV_Manager.registerRepeater(id, x, y, z)
         player:Say(CCTV_i18n.REPEATER_WAS_PLANTED)
     end

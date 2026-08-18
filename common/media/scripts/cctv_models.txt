@@ -1,0 +1,8 @@
+module Base
+{
+    model CameraCCTV
+    {
+        mesh = WorldItems/cctv_camera,
+        scale = 0.01,
+    }
+}
