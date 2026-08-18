@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/mod.info"><img src="https://img.shields.io/badge/modversion-0.1.0--alpha-orange" alt="Mod version"></a>
+  <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/mod.info"><img src="https://img.shields.io/badge/modversion-0.2.0--alpha-orange" alt="Mod version"></a>
   <a href="https://projectzomboid.com/"><img src="https://img.shields.io/badge/Project%20Zomboid-Build%2042-blue" alt="Build 42"></a>
   <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-green" alt="License"></a>
 </p>
@@ -49,9 +49,17 @@
 
 ## ⚠️ Известные ограничения MVP
 
-- Не проверяется, включён ли телевизор и есть ли электричество в сети.
-- Не реализована работа через игровую сеть/связь как отдельный ресурс.
-- Расчёт дальности сигнала упрощён — не учитывает стены и этажи здания.
+- Не проверяется, включён ли телевизор и есть ли электричество в сети (приоритет верси 0.3).
+- Не реализована работа через игровую сеть/связь как отдельный ресурс (приоритет верси 0.3).
+
+## 🛣️ ROADMAP
+
+- Поддержка работы мода на серверной части (для МП - MVP) (версия 0.5.0)
+- Добавить switch системы для камер и их ограничения по версиям (TBD)
+- Реализация работы ПК для просмотра камер (версия 0.4)
+- Разновидности камер по углу обзора и потреблению ресурсов (версия 1.0).
+- Добавление фильтров для камер (TBD)
+- Добавление ночного режима для определенных камер (версия 0.5)
 
 Подробный список изменений — в [CHANGELOG.md](CHANGELOG.md).
 
