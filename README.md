@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/mod.info"><img src="https://img.shields.io/badge/modversion-0.2.0--alpha-orange" alt="Mod version"></a>
+  <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/mod.info"><img src="https://img.shields.io/badge/modversion-0.2.1--alpha-orange" alt="Mod version"></a>
   <a href="https://projectzomboid.com/"><img src="https://img.shields.io/badge/Project%20Zomboid-Build%2042-blue" alt="Build 42"></a>
   <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-green" alt="License"></a>
 </p>
@@ -25,6 +25,18 @@
 
 Сейчас мод находится в статусе **MVP (альфа)** — реализован базовый игровой цикл без учёта электропитания телевизора и работы игровой сети, это будет добавлено позже. Большую часть функционала подготовлю в версии 0.5.X, регистрация мода в steam будет с версии 0.2
 
+## Установка и разработка
+По умолчанию используем базовый Lua и к нему я очень советую поставить emmyLua и Umbrella. </br>
+<a href="git@github.com:PZ-Umbrella/Umbrella.git">Установка Umbrella</a>, она ставиться скоре как пакет (конфиг уже настроен так что кладите ее в ```packages```), так же ей в компанию советую поставить emmyLua как расширение для VSC.
+<p>
+  Так же не возбраняется исползование <a href="https://github.com/asledgehammer/PipeWrench-Template">asledgehammer/PipeWrench-Template</a> Особенно если вы знаете js\ts то вам очень понравиться.</br>
+  Скорее всего дальнейшая разработка мода будет через него. Инструкция и настройка фреймворка есть в его Readme самого репозитория PipeWrench-Template.
+</p>
+
+#### Если у вас другая IDE
+То по установке читайте <a href="https://pz-umbrella.github.io/wiki/">тут</a>. 
+
+
 ## ✨ Возможности
 
 - 📷 **Камера CCTV** — устанавливается из инвентаря на клетку игрока через контекстное меню.
@@ -34,11 +46,12 @@
 - 📶 **Расчёт дальности сигнала** — камеры доступны в пределах базового радиуса или через ретранслятор в зоне действия.
 - 🌐 **Локализация** — базовые строки интерфейса (EN/RU).
 
-## 🛠 Установка
+## 🛠 Установка для игры
 
-1. Скачайте мод (через Steam Workshop или клонированием репозитория).
+1. Скачайте мод (через Steam Workshop (около-стабильная версия) или клонированием репозитория (тестовая версия из master ветки)).
 2. Поместите папку мода в директорию `Zomboid/mods/`.
-3. Включите **CCTV Base** в списке модов в меню игры (требуется Project Zomboid Build 42+).
+3. Включите **CCTV Base** в списке модов в меню игры (требуется Project Zomboid Build 42+). </br>
+```P.S: Обновление ветки происходят чаще чем обновления в стиме! Так что если вам нужна САМАЯ последняя (возможно не стабильная версия) то берите из master```
 
 ## 🎮 Как использовать
 
