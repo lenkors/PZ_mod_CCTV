@@ -14,7 +14,7 @@ module CCTV
         Weight = 1.0,
         DisplayCategory = Misc,
         CantEat = true,
-        WorldStaticModel = Base.CameraCCTV
+        WorldStaticModel = Base.CameraCCTV,
     }
 
     item RepeaterItem
@@ -26,5 +26,18 @@ module CCTV
         Weight = 2.0,
         DisplayCategory = Misc,
         CantEat = true,
+    }
+
+    item MagazineCivilianRC 
+    {
+        Type = Literature,
+        ItemType = base:literature,
+        Weight = 0.1,
+        DisplayName = Nachumba Zero inc. - CCTV instruction,
+        DisplayCategory = RecipeResource,
+        StaticModel = Magazine,
+        Icon = MagazineElectronics01,
+        LearnedRecipes = CCTV.MakeDefaultCameraCCTV,
+        WorldStaticModel = MagazineRadio1Ground,
     }
 }

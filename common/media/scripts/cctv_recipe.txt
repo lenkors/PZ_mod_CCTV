@@ -1,0 +1,26 @@
+module CCTV 
+{
+
+    imports
+	{
+		Base
+	}
+
+    craftRecipe MakeDefaultCameraCCTV {
+        Tags = InHandCraft;CanAlwaysBeResearched;Electrical,
+        timedAction = Making,
+        xpAward = Electrical:50,
+        time = 30,
+        category = Electrical,
+        needTobeLearn = false,
+        inputs {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [Base.Camera;2:Base.ElectronicsScrap],
+        }
+
+        outputs {
+            item 1 CCTV.CameraItem,
+        }
+    }
+
+}

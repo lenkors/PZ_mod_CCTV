@@ -1,0 +1,21 @@
+{
+    "$schema": "https://raw.githubusercontent.com/EmmyLuaLs/emmylua-analyzer-rust/refs/heads/main/crates/emmylua_code_analysis/resources/schema.json",
+    "workspace": {
+        "library": ["packages/Umbrella/library"],
+        "workspaceRoots": [
+            "Contents/mods/cctvbase/common/media/lua",
+            "common/media/lua"
+        ]
+    },
+    "runtime": {
+        "requirePattern": [
+            "shared/?.lua",
+            "client/?.lua",
+            "server/?.lua"
+        ],
+        "version": "Lua5.1"
+    },
+    "diagnostics": {
+        "disable": ["unnecessary-if"]
+    }
+}
