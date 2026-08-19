@@ -4,3 +4,4 @@ id=cctvbase
 description=CCTV Camera System
 versionMin=42.0.0
 modversion=0.3.0
+icon=mini_icon.png
