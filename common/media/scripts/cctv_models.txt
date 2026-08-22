@@ -4,5 +4,6 @@ module Base
     {
         mesh = WorldItems/cctv_camera,
         scale = 0.01,
+        texture = WorldItems/texture_cctv_cam,
     }
 }

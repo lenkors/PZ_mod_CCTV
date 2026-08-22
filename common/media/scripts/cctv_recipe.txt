@@ -6,6 +6,23 @@ module CCTV
 		Base
 	}
 
+    craftRecipe MakeDefaultRepeater {
+        Tags = InHandCraft;CanAlwaysBeResearched;Electrical,
+        timedAction = Making,
+        xpAward = Electrical:50,
+        time = 40,
+        category = Electrical,
+        needTobeLearn = false,
+        inputs {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [Base.Aluminum;3:Base.ElectronicsScrap],
+        }
+
+        outputs {
+            item 1 CCTV.RepeaterItem,
+        }
+    }
+
     craftRecipe MakeDefaultCameraCCTV {
         Tags = InHandCraft;CanAlwaysBeResearched;Electrical,
         timedAction = Making,

@@ -42,12 +42,12 @@ local function placeDevice(playerNum, item, isCamera)
             return
         end
 
-        local id = CCTV_Manager.generateId("cctv_cam")
+        local id = CCTV_Manager.generateId(ItemType.Camera).id
         local camName = CCTV_i18n.CAMERA .. " " .. x .. ":" .. y
         CCTV_Manager.registerCamera(id, camName, x, y, z)
         player:Say(CCTV_i18n.CAMERA_WAS_PLANTED .. ": " .. camName)
     else
-        local id = CCTV_Manager.generateId("cctv_rep")
+        local id = CCTV_Manager.generateId(ItemType.Repeater).id
         CCTV_Manager.registerRepeater(id, x, y, z)
         player:Say(CCTV_i18n.REPEATER_WAS_PLANTED)
     end

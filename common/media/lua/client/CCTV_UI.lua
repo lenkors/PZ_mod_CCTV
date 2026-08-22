@@ -2,7 +2,7 @@ require "ISUI/ISUIElement"
 require "CCTV_i18n"
 
 CCTV_UI = ISUIElement:derive("CCTV_UI")
-CCTV_UI.FOG_REVEAL_RADIUS = 15 -- дальность раскрытия тумана войны вокруг камеры (в тайлах)
+CCTV_UI.FOG_REVEAL_RADIUS = 20 -- дальность раскрытия тумана войны вокруг камеры (в тайлах)
 
 function CCTV_UI:new(x, y, width, height, cameraList, playerNum)
     local o = ISUIElement:new(x, y, width, height)
@@ -31,7 +31,7 @@ function CCTV_UI:initialise()
     self:addChild(self.nextBtn)
 
     -- ВЫХОД
-    self.closeBtn = ISButton:new(self.width - 150, bottomY, btnW, btnH, CCTV_i18n.DISCONECT_FORM_CCTV, self, CCTV_UI.onClose)
+    self.closeBtn = ISButton:new(self.width - 150, bottomY, btnW, btnH, CCTV_i18n.DISCONNECT_FROM_CCTV, self, CCTV_UI.onClose)
     self.closeBtn:initialise()
     self:addChild(self.closeBtn)
 
@@ -63,13 +63,15 @@ function CCTV_UI:switchCamera(index)
 end
 
 
+---@param player IsoPlayer
 function CCTV_UI:applySpectatorState(player)
     player:setInvisible(true)
-    player:setGhostMode(true)
+    player:setGhostMode(true, true)
     player:setCollidable(false)
     player:setAlpha(0.0)
+    player:setTargetAlpha(0)
     player:setBlockMovement(true)
-    -- player.doRenderShadow = false
+    player:setCanSeeAll(false)
 end
 
 function CCTV_UI:revealFogAroundCamera(cam)
@@ -144,9 +146,9 @@ function CCTV_UI:onClose()
         player:setCollidable(true)
         player:setBlockMovement(false)
         player:setInvisible(false)
-        player:setGhostMode(false)
-        -- player.doRenderShadow = true
-
+        player:setCanSeeAll(false)
+        player:setGhostMode(false, true)
+        player:setTargetAlpha(1)
         if self.origAlpha then
             player:setAlpha(self.origAlpha)
         else

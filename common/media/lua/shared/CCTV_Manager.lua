@@ -1,8 +1,12 @@
+require "consts"
+
+local _ItemType = CCTV_Consts.ItemType
+
 CCTV_Manager = CCTV_Manager or {}
 CCTV_Manager.Cameras = CCTV_Manager.Cameras or {}
 CCTV_Manager.Repeaters = CCTV_Manager.Repeaters or {}
 
-CCTV_Manager.MAX_DEFAULT_DIRECT_RANGE = 30 -- Радиус без ретранслятора
+CCTV_Manager.MAX_DEFAULT_DIRECT_RANGE = 10 -- Радиус без ретранслятора
 CCTV_Manager.MIN_CAMERA_SPACING = 5 -- Минимальная дистанция между камерами при установке (в тайлах)
 
 -- TODO (мультиплеер): CCTV_Manager сейчас пишет напрямую в ModData без серверной
@@ -15,12 +19,24 @@ function CCTV_Manager.loadData()
     return modData
 end
 
-function CCTV_Manager.generateId(prefix)
+---@param type CCTV_Consts.ItemType
+function CCTV_Manager.generateId(type)
     local data = CCTV_Manager.loadData()
     data.NextId = (data.NextId or 0) + 1
-    return prefix .. "_" .. data.NextId
+    local prefix = ""
+    if type == _ItemType.Camera then
+        prefix = "cctv_cam"
+    elseif type == _ItemType.Repeater then
+        prefix = "cctv_rep"
+    end
+
+    return {
+        id = prefix .. "_" .. data.NextId,
+        type = type
+    }
 end
 
+--TODO: оптимизировать поиск камер, сейчас он может дать O(n) и может тормозить при большом количестве камер/ретрансляторов
 function CCTV_Manager.registerCamera(id, name, x, y, z)
     local data = CCTV_Manager.loadData()
     data.Cameras[id] = { name = name, x = x, y = y, z = z }
@@ -31,10 +47,19 @@ function CCTV_Manager.registerRepeater(id, x, y, z)
     data.Repeaters[id] = { x = x, y = y, z = z }
 end
 
-function CCTV_Manager.removeDevice(id)
+
+
+function CCTV_Manager.removeDevice(id, type)
     local data = CCTV_Manager.loadData()
-    data.Cameras[id] = nil
-    data.Repeaters[id] = nil
+    if type == _ItemType.Camera then
+        data.Cameras[id] = nil
+        return true
+    elseif type == _ItemType.Repeater then
+        data.Repeaters[id] = nil
+        return true
+    end
+
+    return false
 end
 
 -- Расчет расстояния

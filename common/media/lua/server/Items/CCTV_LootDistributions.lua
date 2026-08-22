@@ -8,12 +8,21 @@ require 'Items/ProceduralDistributions'
 -- @arg place Указываем место спавна: MechanicShelfElectric 
 local CCTV_Distribution = {
     MechanicShelfElectric = {
+        rolls = 2,
         items = {
             "CCTV.CameraItem", 2,
             "CCTV.RepeaterItem", 1
+        },
+        junk = {
+            rolls = 1,
+            items = {
+                "CCTV.CameraItem", 2,
+                "CCTV.RepeaterItem", 1
+            }
         }
     },
     StoreShelfElectronics = {
+        rolls = 1,
         items = {
             "CCTV.CameraItem", 4,
             "CCTV.RepeaterItem", 1

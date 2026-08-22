@@ -37,7 +37,7 @@ module CCTV
         DisplayCategory = RecipeResource,
         StaticModel = Magazine,
         Icon = MagazineElectronics01,
-        LearnedRecipes = CCTV.MakeDefaultCameraCCTV,
+        LearnedRecipes = CCTV.MakeDefaultCameraCCTV;CCTV.MakeDefaultRepeater,
         WorldStaticModel = MagazineRadio1Ground,
     }
 }
