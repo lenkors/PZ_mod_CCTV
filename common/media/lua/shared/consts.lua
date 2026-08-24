@@ -5,5 +5,4 @@ CCTV_Consts.ItemType = {
      Repeater = 2
  }
 
-
 return CCTV_Consts

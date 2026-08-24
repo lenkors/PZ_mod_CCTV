@@ -62,6 +62,10 @@ function CCTV_UI:switchCamera(index)
     end
 end
 
+---@param player IsoPlayer
+function CCTV_UI:setLockMovementToCCTV(player)
+    player.nx = 0
+end
 
 ---@param player IsoPlayer
 function CCTV_UI:applySpectatorState(player)
@@ -159,4 +163,32 @@ function CCTV_UI:onClose()
 
     self:removeFromUIManager()
     CCTV_UI.instance = nil
+end
+
+-- Нашел такое решение вращение камерой (мы отходим от базового look anim и делаем кастомный поворот игрока как объектива камеры)
+-- Просто мы не можем и лочить движение и смотреть на уровне базового апи, придеться делать что то свое по верх основного апи (главное что не конфликтовало с другими модами)
+function CCTV_UI:update()
+    ISUIElement.update(self)
+
+    local player = getSpecificPlayer(self.playerNum or 0)
+    if not player then return end
+
+    if isMouseButtonPressed(1) then -- 0 = ЛКМ, 1 = ПКМ в PZ input API
+        local mx, my = getMouseX(), getMouseY()
+        local px, py = player:getScreenX(), player:getScreenY() 
+
+        local dx = mx - px
+        local dy = my - py
+
+        if dx ~= 0 or dy ~= 0 then
+            local len = math.sqrt(dx*dx + dy*dy)
+            local nx, ny = dx/len, dy/len
+
+            player.nx = nx
+            player.ny = ny
+            player.scriptnx = nx
+            player.scriptny = ny
+            player:setDir(IsoDirections.fromAngle(math.deg(math.atan2(ny, nx))))
+        end
+    end
 end
