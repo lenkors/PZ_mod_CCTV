@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/mod.info"><img src="https://img.shields.io/badge/modversion-0.2.1--alpha-orange" alt="Mod version"></a>
+  <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/mod.info"><img src="https://img.shields.io/badge/modversion-0.3.1--alpha-orange" alt="Mod version"></a>
   <a href="https://projectzomboid.com/"><img src="https://img.shields.io/badge/Project%20Zomboid-Build%2042-blue" alt="Build 42"></a>
   <a href="https://github.com/lenkors/PZ_mod_CCTV/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-green" alt="License"></a>
 </p>
