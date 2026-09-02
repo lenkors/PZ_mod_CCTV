@@ -26,6 +26,8 @@ module CCTV
         Weight = 2.0,
         DisplayCategory = Misc,
         CantEat = true,
+        /* Временно используем модель HomeAlarm */
+        WorldStaticModel = HomeAlarm,
     }
 
     item MagazineCivilianRC 

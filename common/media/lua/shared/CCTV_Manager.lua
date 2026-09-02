@@ -6,8 +6,8 @@ CCTV_Manager = CCTV_Manager or {}
 CCTV_Manager.Cameras = CCTV_Manager.Cameras or {}
 CCTV_Manager.Repeaters = CCTV_Manager.Repeaters or {}
 
-CCTV_Manager.MAX_DEFAULT_DIRECT_RANGE = 10 -- Радиус без ретранслятора
-CCTV_Manager.MIN_CAMERA_SPACING = 5 -- Минимальная дистанция между камерами при установке (в тайлах)
+CCTV_Manager.MAX_DEFAULT_DIRECT_RANGE = CCTV_Consts.Config.MAX_DEFAULT_DIRECT_RANGE -- Радиус без ретранслятора
+CCTV_Manager.MIN_CAMERA_SPACING = CCTV_Consts.Config.MIN_CAMERA_SPACING -- Минимальная дистанция между камерами при установке (в тайлах)
 
 -- TODO (мультиплеер): CCTV_Manager сейчас пишет напрямую в ModData без серверной
 -- синхронизации/авторитета (нет transmit(), нет проверки на сервере). Мод пока
