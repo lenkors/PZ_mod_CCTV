@@ -117,7 +117,7 @@ function CCTV_UI:prerender()
         local camName = activeCam.name or ("Camera " .. self.currentCamIndex)
         local signal = activeCam.signal or 100
         
-        self:drawText("● REC [" .. string.upper(camName) .. "]", 40, 40, 0, 1, 0, 1, UIFont.Medium)
+        self:drawText("REC [" .. string.upper(camName) .. "]", 40, 40, 0, 1, 0, 1, UIFont.Medium)
         self:drawText((CCTV_i18n.SIGNAL) .. ": " .. signal .. "%", 40, 65, 0, 0.8, 0, 0.8, UIFont.Small)
         self:drawText((CCTV_i18n.CAMERA) .. self.currentCamIndex .. " / " .. #self.cameraList, 40, 85, 0.7, 0.7, 0.7, 1, UIFont.Small)
         self:drawText('Nachumbas Computers .inc', 40, 80, 0, 1, 0, 1, UIFont.Large)

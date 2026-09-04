@@ -20,10 +20,26 @@ local function hasAdjacentWallOrFence(square)
     return false
 end
 
-local function placeDevice(playerNum, item, isCamera)
+
+local getPlayerData = function(playerNum)
     local player = getSpecificPlayer(playerNum)
+    if not player then
+        return {
+            player = nil,
+            inventory = nil,
+        }
+    end
+
+    return {
+        player = player,
+        inventory = player:getInventory()
+    }
+end
+
+local function placeDevice(playerNum, item, isCamera)
+    local player = getPlayerData(playerNum).player
     if not player then return end
-    
+
     local square = player:getCurrentSquare()
     if not square then return end
 
@@ -82,6 +98,39 @@ local function CCTV_OnFillInventoryContextMenu(playerNum, context, items)
     end
 end
 
+local function removeItem(playerNum, item, fullName)
+    local player = getPlayerData(playerNum).player
+    -- local inventory = getPlayerData(playerNum).inventory
+    if not player then return end
+
+    if fullName == "CCTV.CameraItem" then
+        CCTV_Manager.removeDevice(item, CCTV_Consts.ItemType.Camera)
+    elseif fullName == "CCTV.RepeaterItem" then
+        CCTV_Manager.removeDevice(item, CCTV_Consts.ItemType.Repeater)
+    end
+
+end
+
+--- @param playerNum number
+--- @param context ISContextMenu
+--- @param worldObjects IsoObject[]
+local function CCTV_OnFillWorldObjectContextMenu(playerNum, context, worldObjects)
+    for _, item in ipairs(worldObjects) do
+        if item and item.getType then
+            local fullName = item:getName()
+            if fullName == "CCTV.CameraItem" or fullName == "CCTV.RepeaterItem" then
+                context:addOption(fullName == "CCTV.CameraItem" and "CCTV.RemoveCameraItem" or "CCTV.RemoveRepeaterItem", item, function()
+                    removeItem(playerNum, item, fullName)
+                end)
+            end
+        end
+    end
+end
+
 if Events and Events.OnFillInventoryObjectContextMenu then
     Events.OnFillInventoryObjectContextMenu.Add(CCTV_OnFillInventoryContextMenu)
+end
+
+if Events and Events.OnFillWorldObjectContextMenu then
+    Events.OnFillWorldObjectContextMenu.Remove(CCTV_OnFillWorldObjectContextMenu)
 end

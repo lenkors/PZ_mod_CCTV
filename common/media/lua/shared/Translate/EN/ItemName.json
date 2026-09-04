@@ -3,5 +3,7 @@
     "CCTV.CameraItem": "Camera CCTV",
     "CCTV.RepeaterItem": "Repeater CCTV",
     "CCTV.MakeDefaultCameraCCTV": "Make Default CCTV Camera",
-    "CCTV.MagazineCivilianRC": "Nachumba Zero inc - CCTV instructions"
+    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - CCTV instructions",
+    "CCTV.RemoveCameraItem": "Remove CCTV Camera",
+    "CCTV.RemoveRepeaterItem": "Pick up CCTV Repeater"
 }

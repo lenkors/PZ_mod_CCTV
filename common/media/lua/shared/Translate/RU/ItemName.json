@@ -3,5 +3,7 @@
     "CCTV.CameraItem": "Видеокамера CCTV",
     "CCTV.RepeaterItem": "Ретранслятор CCTV",
     "CCTV.MakeDefaultCameraCCTV": "Сделать базовую видеокамеру CCTV",
-    "CCTV.MagazineCivilianRC": "Nachumba Zero inc - Инструкция по эксплуатации CCTV"
+    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - Инструкция по эксплуатации CCTV",
+    "CCTV.RemoveCameraItem": "Снять видеокамеру CCTV",
+    "CCTV.RemoveRepeaterItem": "Взять ретранслятор CCTV"
 }

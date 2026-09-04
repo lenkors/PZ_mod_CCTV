@@ -5,6 +5,7 @@ local _ItemType = CCTV_Consts.ItemType
 CCTV_Manager = CCTV_Manager or {}
 CCTV_Manager.Cameras = CCTV_Manager.Cameras or {}
 CCTV_Manager.Repeaters = CCTV_Manager.Repeaters or {}
+CCTV_Manager.Switches = CCTV_Manager.Switches or {} --- Для свитчей на будущую версию 
 
 CCTV_Manager.MAX_DEFAULT_DIRECT_RANGE = CCTV_Consts.Config.MAX_DEFAULT_DIRECT_RANGE -- Радиус без ретранслятора
 CCTV_Manager.MIN_CAMERA_SPACING = CCTV_Consts.Config.MIN_CAMERA_SPACING -- Минимальная дистанция между камерами при установке (в тайлах)
@@ -36,7 +37,6 @@ function CCTV_Manager.generateId(type)
     }
 end
 
---TODO: оптимизировать поиск камер, сейчас он может дать O(n) и может тормозить при большом количестве камер/ретрансляторов
 function CCTV_Manager.registerCamera(id, name, x, y, z)
     local data = CCTV_Manager.loadData()
     data.Cameras[id] = { name = name, x = x, y = y, z = z }
@@ -45,6 +45,13 @@ end
 function CCTV_Manager.registerRepeater(id, x, y, z)
     local data = CCTV_Manager.loadData()
     data.Repeaters[id] = { x = x, y = y, z = z }
+end
+
+--- @deprecated помечаем как deprecated, будет использоваться для свитчей
+function CCTV_Manager.registerSwitch(id, x, y, z)
+    local data = CCTV_Manager.loadData()
+    data.Switches = data.Switches or {}
+    data.Switches[id] = { x = x, y = y, z = z }
 end
 
 
@@ -122,6 +129,7 @@ function CCTV_Manager.getAvailableCameras(tvX, tvY)
             -- Ищем ближайший из доступных по цепочке ретрансляторов, дотягивающийся до камеры
             for _, rep in pairs(reachableRepeaters) do
                 local repDist = getDistance(rep.x, rep.y, cam.x, cam.y)
+                -- пока что у нас базовый максимум без улучшений
                 if repDist <= CCTV_Manager.MAX_DEFAULT_DIRECT_RANGE and (not bestDist or repDist < bestDist) then
                     bestDist = repDist
                 end
