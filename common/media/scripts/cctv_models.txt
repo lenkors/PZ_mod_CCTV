@@ -3,6 +3,10 @@ module Base
     model CameraCCTV
     {
         mesh = WorldItems/cctv_camera,
-        scale = 0.01,
+        scale = 0.50,
+        texture = WorldItems/texture_cctv_cam,
     }
+
+    /* model RepeaterCCTV {
+    } */
 }

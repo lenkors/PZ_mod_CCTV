@@ -2,5 +2,8 @@
     "$schema": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/ItemName.schema.json",
     "CCTV.CameraItem": "Camera CCTV",
     "CCTV.RepeaterItem": "Repeater CCTV",
-    "CCTV.MakeDefaultCameraCCTV": "Make Default CCTV Camera"
+    "CCTV.MakeDefaultCameraCCTV": "Make Default CCTV Camera",
+    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - CCTV instructions",
+    "CCTV.RemoveCameraItem": "Remove CCTV Camera",
+    "CCTV.RemoveRepeaterItem": "Pick up CCTV Repeater"
 }

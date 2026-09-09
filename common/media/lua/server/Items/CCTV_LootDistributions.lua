@@ -5,15 +5,25 @@ require 'Items/ProceduralDistributions'
 -- TODO: Нужно проверить работоспособность обоих методов!!
 
 -- CCTV Camera (Default)
--- @arg place Указываем место спавна: MechanicShelfElectric 
+-- Нормальной доки по спавнам или особым местам я не нашел по этому ищем на прямую в других модах или файлах игры (но почти все использую старый формат спавна через вставку в таблицу какой то sql)
+--- @arg place Указываем место спавна: MechanicShelfElectric 
 local CCTV_Distribution = {
     MechanicShelfElectric = {
+        rolls = 2,
         items = {
             "CCTV.CameraItem", 2,
             "CCTV.RepeaterItem", 1
+        },
+        junk = {
+            rolls = 1,
+            items = {
+                "CCTV.CameraItem", 2,
+                "CCTV.RepeaterItem", 1
+            }
         }
     },
     StoreShelfElectronics = {
+        rolls = 1,
         items = {
             "CCTV.CameraItem", 4,
             "CCTV.RepeaterItem", 1

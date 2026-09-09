@@ -2,7 +2,7 @@ require "ISUI/ISUIElement"
 require "CCTV_i18n"
 
 CCTV_UI = ISUIElement:derive("CCTV_UI")
-CCTV_UI.FOG_REVEAL_RADIUS = 15 -- дальность раскрытия тумана войны вокруг камеры (в тайлах)
+CCTV_UI.FOG_REVEAL_RADIUS = 20 -- дальность раскрытия тумана войны вокруг камеры (в тайлах)
 
 function CCTV_UI:new(x, y, width, height, cameraList, playerNum)
     local o = ISUIElement:new(x, y, width, height)
@@ -31,7 +31,7 @@ function CCTV_UI:initialise()
     self:addChild(self.nextBtn)
 
     -- ВЫХОД
-    self.closeBtn = ISButton:new(self.width - 150, bottomY, btnW, btnH, CCTV_i18n.DISCONECT_FORM_CCTV, self, CCTV_UI.onClose)
+    self.closeBtn = ISButton:new(self.width - 150, bottomY, btnW, btnH, CCTV_i18n.DISCONNECT_FROM_CCTV, self, CCTV_UI.onClose)
     self.closeBtn:initialise()
     self:addChild(self.closeBtn)
 
@@ -62,14 +62,20 @@ function CCTV_UI:switchCamera(index)
     end
 end
 
+---@param player IsoPlayer
+function CCTV_UI:setLockMovementToCCTV(player)
+    player.nx = 0
+end
 
+---@param player IsoPlayer
 function CCTV_UI:applySpectatorState(player)
     player:setInvisible(true)
-    player:setGhostMode(true)
+    player:setGhostMode(true, true)
     player:setCollidable(false)
     player:setAlpha(0.0)
+    player:setTargetAlpha(0)
     player:setBlockMovement(true)
-    -- player.doRenderShadow = false
+    player:setCanSeeAll(false)
 end
 
 function CCTV_UI:revealFogAroundCamera(cam)
@@ -111,7 +117,7 @@ function CCTV_UI:prerender()
         local camName = activeCam.name or ("Camera " .. self.currentCamIndex)
         local signal = activeCam.signal or 100
         
-        self:drawText("● REC [" .. string.upper(camName) .. "]", 40, 40, 0, 1, 0, 1, UIFont.Medium)
+        self:drawText("REC [" .. string.upper(camName) .. "]", 40, 40, 0, 1, 0, 1, UIFont.Medium)
         self:drawText((CCTV_i18n.SIGNAL) .. ": " .. signal .. "%", 40, 65, 0, 0.8, 0, 0.8, UIFont.Small)
         self:drawText((CCTV_i18n.CAMERA) .. self.currentCamIndex .. " / " .. #self.cameraList, 40, 85, 0.7, 0.7, 0.7, 1, UIFont.Small)
         self:drawText('Nachumbas Computers .inc', 40, 80, 0, 1, 0, 1, UIFont.Large)
@@ -144,9 +150,9 @@ function CCTV_UI:onClose()
         player:setCollidable(true)
         player:setBlockMovement(false)
         player:setInvisible(false)
-        player:setGhostMode(false)
-        -- player.doRenderShadow = true
-
+        player:setCanSeeAll(false)
+        player:setGhostMode(false, true)
+        player:setTargetAlpha(1)
         if self.origAlpha then
             player:setAlpha(self.origAlpha)
         else
@@ -157,4 +163,32 @@ function CCTV_UI:onClose()
 
     self:removeFromUIManager()
     CCTV_UI.instance = nil
+end
+
+-- Нашел такое решение вращение камерой (мы отходим от базового look anim и делаем кастомный поворот игрока как объектива камеры)
+-- Просто мы не можем и лочить движение и смотреть на уровне базового апи, придеться делать что то свое по верх основного апи (главное что не конфликтовало с другими модами)
+function CCTV_UI:update()
+    ISUIElement.update(self)
+
+    local player = getSpecificPlayer(self.playerNum or 0)
+    if not player then return end
+
+    if isMouseButtonPressed(1) then -- 0 = ЛКМ, 1 = ПКМ в PZ input API
+        local mx, my = getMouseX(), getMouseY()
+        local px, py = player:getScreenX(), player:getScreenY() 
+
+        local dx = mx - px
+        local dy = my - py
+
+        if dx ~= 0 or dy ~= 0 then
+            local len = math.sqrt(dx*dx + dy*dy)
+            local nx, ny = dx/len, dy/len
+
+            player.nx = nx
+            player.ny = ny
+            player.scriptnx = nx
+            player.scriptny = ny
+            player:setDir(IsoDirections.fromAngle(math.deg(math.atan2(ny, nx))))
+        end
+    end
 end
