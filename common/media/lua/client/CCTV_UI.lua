@@ -47,11 +47,8 @@ function CCTV_UI:switchCamera(index)
     if cam then
         local player = getSpecificPlayer(self.playerNum or 0)
         if player then
-            if not self.origX then
-                self.origX = player:getX()
-                self.origY = player:getY()
-                self.origZ = player:getZ()
-                self.origAlpha = player:getAlpha()
+            if not self.origState then
+                self.origState = self:captureOriginalState(player)
             end
 
             player:teleportTo(cam.x, cam.y, cam.z)
@@ -68,12 +65,29 @@ function CCTV_UI:setLockMovementToCCTV(player)
 end
 
 ---@param player IsoPlayer
+function CCTV_UI:captureOriginalState(player)
+    local idx = self.playerNum or 0
+    return {
+        x = player:getX(),
+        y = player:getY(),
+        z = player:getZ(),
+        alpha = player:getAlpha(idx),
+        targetAlpha = player:getTargetAlpha(idx),
+        invisible = player:isInvisible(),
+        ghost = player:isGhostMode(),
+        collidable = player:isCollidable(),
+        blockMovement = player:isBlockMovement(),
+        canSeeAll = player:canSeeAll(),
+    }
+end
+
+---@param player IsoPlayer
 function CCTV_UI:applySpectatorState(player)
-    player:setInvisible(true)
+    player:setInvisible(true, true)
     player:setGhostMode(true, true)
     player:setCollidable(false)
-    player:setAlpha(0.0)
-    player:setTargetAlpha(0)
+    player:setAlpha(self.playerNum or 0, 0.0)
+    player:setTargetAlpha(self.playerNum or 0, 0)
     player:setBlockMovement(true)
     player:setCanSeeAll(false)
 end
@@ -142,23 +156,17 @@ end
 
 function CCTV_UI:onClose()
     local player = getSpecificPlayer(self.playerNum or 0)
-    if player then
-        if self.origX then
-            player:teleportTo(self.origX, self.origY, self.origZ)
-        end
-
-        player:setCollidable(true)
-        player:setBlockMovement(false)
-        player:setInvisible(false)
-        player:setCanSeeAll(false)
-        player:setGhostMode(false, true)
-        player:setTargetAlpha(1)
-        if self.origAlpha then
-            player:setAlpha(self.origAlpha)
-        else
-            player:setAlpha(1.0)
-        end
-
+    local orig = self.origState
+    if player and orig then
+        local idx = self.playerNum or 0
+        player:teleportTo(orig.x, orig.y, orig.z)
+        player:setCollidable(orig.collidable)
+        player:setBlockMovement(orig.blockMovement)
+        player:setCanSeeAll(orig.canSeeAll)
+        player:setGhostMode(orig.ghost, true)
+        player:setInvisible(orig.invisible, true)
+        player:setTargetAlpha(idx, orig.targetAlpha)
+        player:setAlpha(idx, orig.alpha)
     end
 
     self:removeFromUIManager()
