@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "scripts": {
+    "lint:translate": "node ./scripts/translate-validator.js"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  }
+}

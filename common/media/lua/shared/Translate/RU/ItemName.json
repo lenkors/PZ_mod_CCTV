@@ -3,19 +3,5 @@
     "CCTV.CameraItem": "Видеокамера CCTV",
     "CCTV.RepeaterItem": "Ретранслятор CCTV",
     "CCTV.MakeDefaultCameraCCTV": "Сделать базовую видеокамеру CCTV",
-    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - Инструкция по эксплуатации CCTV",
-    "CCTV.RemoveCameraItem": "Снять видеокамеру CCTV",
-    "CCTV.RemoveRepeaterItem": "Взять ретранслятор CCTV",
-    "CCTV.REPEATER_WAS_PLANTED": "Ретранслятор установлен",
-    "CCTV.CAMERA_NEEDS_WALL": "Камеру можно установить только на стену",
-    "CCTV.CAMERA_TOO_CLOSE": "Камера слишком близко к другой камере",
-    "CCTV.CAMERA_WAS_PLANTED": "Видеокамера установлена",
-    "CCTV.OUT_OF_RANGE": "Вне зоны действия",
-    "CCTV.NoPower": "Нет питания",
-    "CCTV.NextCamera": "Следующая камера",
-    "CCTV.PreviousCamera": "Предыдущая камера",
-    "CCTV.CloseCCTV": "Закрыть CCTV",
-    "CCTV.ConnectToCCTV": "Подключиться к CCTV",
-    "CCTV.SetupCamera": "Установить видеокамеру CCTV",
-    "CCTV.SetupRepeater": "Установить ретранслятор CCTV"
+    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - Инструкция по эксплуатации CCTV"
 }

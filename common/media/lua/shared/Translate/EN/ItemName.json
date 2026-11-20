@@ -3,19 +3,5 @@
     "CCTV.CameraItem": "Camera CCTV",
     "CCTV.RepeaterItem": "Repeater CCTV",
     "CCTV.MakeDefaultCameraCCTV": "Make Default CCTV Camera",
-    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - CCTV instructions",
-    "CCTV.RemoveCameraItem": "Remove CCTV Camera",
-    "CCTV.RemoveRepeaterItem": "Pick up CCTV Repeater",
-    "CCTV.REPEATER_WAS_PLANTED": "Repeater was planted",
-    "CCTV.CAMERA_NEEDS_WALL": "Camera can only be placed on a wall",
-    "CCTV.CAMERA_TOO_CLOSE": "Camera is too close to another camera",
-    "CCTV.CAMERA_WAS_PLANTED": "Camera was planted",
-    "CCTV.OUT_OF_RANGE": "Out of range",
-    "CCTV.NoPower": "No power",
-    "CCTV.NextCamera": "Next Camera",
-    "CCTV.PreviousCamera": "Previous Camera",
-    "CCTV.CloseCCTV": "Close CCTV",
-    "CCTV.ConnectToCCTV": "Connect to CCTV",
-    "CCTV.SetupCamera": "Setup CCTV Camera",
-    "CCTV.SetupRepeater": "Setup CCTV Repeater"
+    "CCTV.MagazineCivilianRC": "Nachumba Computers inc - CCTV instructions"
 }

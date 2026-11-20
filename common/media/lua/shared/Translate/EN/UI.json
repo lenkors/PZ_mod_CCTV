@@ -1,0 +1,16 @@
+{
+    "CCTV_RemoveCameraItem": "Remove CCTV Camera",
+    "CCTV_RemoveRepeaterItem": "Pick up CCTV Repeater",
+    "CCTV_RepeaterWasPlanted": "Repeater was planted",
+    "CCTV_CameraNeedsWall": "Camera can only be placed on a wall",
+    "CCTV_CameraTooClose": "Camera is too close to another camera",
+    "CCTV_CameraWasPlanted": "Camera was planted",
+    "CCTV_OutOfRange": "Out of range",
+    "CCTV_NoPower": "No power",
+    "CCTV_NextCamera": "Next Camera",
+    "CCTV_PreviousCamera": "Previous Camera",
+    "CCTV_CloseCCTV": "Close CCTV",
+    "CCTV_ConnectToCCTV": "Connect to CCTV",
+    "CCTV_SetupCamera": "Setup CCTV Camera",
+    "CCTV_SetupRepeater": "Setup CCTV Repeater"
+}
