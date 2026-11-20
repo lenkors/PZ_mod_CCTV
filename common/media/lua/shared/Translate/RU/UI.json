@@ -1,0 +1,16 @@
+{
+    "CCTV_RemoveCameraItem": "Снять видеокамеру CCTV",
+    "CCTV_RemoveRepeaterItem": "Взять ретранслятор CCTV",
+    "CCTV_RepeaterWasPlanted": "Ретранслятор установлен",
+    "CCTV_CameraNeedsWall": "Камеру можно установить только на стену",
+    "CCTV_CameraTooClose": "Камера слишком близко к другой камере",
+    "CCTV_CameraWasPlanted": "Видеокамера установлена",
+    "CCTV_OutOfRange": "Вне зоны действия",
+    "CCTV_NoPower": "Нет питания",
+    "CCTV_NextCamera": "Следующая камера",
+    "CCTV_PreviousCamera": "Предыдущая камера",
+    "CCTV_CloseCCTV": "Закрыть CCTV",
+    "CCTV_ConnectToCCTV": "Подключиться к CCTV",
+    "CCTV_SetupCamera": "Установить видеокамеру CCTV",
+    "CCTV_SetupRepeater": "Установить ретранслятор CCTV"
+}

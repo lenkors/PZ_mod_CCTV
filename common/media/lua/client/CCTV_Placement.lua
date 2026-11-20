@@ -48,24 +48,24 @@ local function placeDevice(playerNum, item, isCamera)
     if isCamera then
         -- Камеру можно вешать только на стену или забор
         if not hasAdjacentWallOrFence(square) then
-            player:Say(CCTV_i18n.CAMERA_NEEDS_WALL)
+            player:Say("CCTV_CameraNeedsWall")
             return
         end
 
         -- Не даём ставить камеры кучей в одном месте
         if CCTV_Manager.isCameraTooClose(x, y) then
-            player:Say(CCTV_i18n.CAMERA_TOO_CLOSE)
+            player:Say("CCTV.CameraTooClose")
             return
         end
 
         local id = CCTV_Manager.generateId(ItemType.Camera).id
         local camName = CCTV_i18n.CAMERA .. " " .. x .. ":" .. y
         CCTV_Manager.registerCamera(id, camName, x, y, z)
-        player:Say(CCTV_i18n.CAMERA_WAS_PLANTED .. ": " .. camName)
+        player:Say("CCTV_CameraWasPlanted" .. ": " .. camName)
     else
         local id = CCTV_Manager.generateId(ItemType.Repeater).id
         CCTV_Manager.registerRepeater(id, x, y, z)
-        player:Say(CCTV_i18n.REPEATER_WAS_PLANTED)
+        player:Say("CCTV_RepeaterWasPlanted")
     end
 
     -- Забираем предмет из инвентаря
@@ -86,11 +86,11 @@ local function CCTV_OnFillInventoryContextMenu(playerNum, context, items)
             local fullType = item:getFullType()
 
             if fullType == "CCTV.CameraItem" then
-                context:addOption(CCTV_i18n.SETUP_CAMERA, item, function()
+                context:addOption("CCTV.SetupCamera", item, function()
                     placeDevice(playerNum, item, true)
                 end)
             elseif fullType == "CCTV.RepeaterItem" then
-                context:addOption(CCTV_i18n.SETUP_REPEATER, item, function()
+                context:addOption("CCTV.SetupRepeater", item, function()
                     placeDevice(playerNum, item, false)
                 end)
             end
@@ -119,7 +119,7 @@ local function CCTV_OnFillWorldObjectContextMenu(playerNum, context, worldObject
         if item and item.getType then
             local fullName = item:getName()
             if fullName == "CCTV.CameraItem" or fullName == "CCTV.RepeaterItem" then
-                context:addOption(fullName == "CCTV.CameraItem" and "CCTV.RemoveCameraItem" or "CCTV.RemoveRepeaterItem", item, function()
+                context:addOption(fullName == "CCTV.CameraItem" and "CCTV_RemoveCameraItem" or "CCTV_RemoveRepeaterItem", item, function()
                     removeItem(playerNum, item, fullName)
                 end)
             end

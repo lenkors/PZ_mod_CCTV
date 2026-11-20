@@ -1,13 +1,17 @@
 {
   "json.schemas": [
     {
-      "fileMatch": [
-        "**/media/lua/shared/Translate/*/ItemName.json"
-      ],
-      "url": "https://raw.githubusercontent.com/pz-wiki-modding/pz-translation-data/refs/heads/main/PZ_Translation_Schemas/Moveables.schema.json",
-      "name": "PZ Items name translation schema"
+      "fileMatch": ["**/Translate/*/ItemName.json"],
+      "url": "https://raw.githubusercontent.com/escapepz/pz_translation_json_schema/42.21.0/schemas/ItemName.schema.json",
+      "name": "PZ ItemName Schema"
+    },
+    {
+      "fileMatch": ["**/Translate/*/UI.json"],
+      "url": "https://raw.githubusercontent.com/escapepz/pz_translation_json_schema/42.21.0/schemas/UI.schema.json",
+      "name": "PZ UI Schema"
     }
   ],
+  
   "Lua.diagnostics.globals": [
     "ProceduralDistributions"
   ]

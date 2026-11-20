@@ -21,17 +21,17 @@ function CCTV_UI:initialise()
     local bottomY = self.height - 70
 
     -- ПРЕДЫДУЩАЯ КАМЕРА
-    self.prevBtn = ISButton:new(30, bottomY, btnW, btnH, CCTV_i18n.PREV_CAMERA, self, CCTV_UI.onPrevCam)
+    self.prevBtn = ISButton:new(30, bottomY, btnW, btnH, "CCTV.PreviousCamera", self, CCTV_UI.onPrevCam)
     self.prevBtn:initialise()
     self:addChild(self.prevBtn)
 
     -- СЛЕДУЮЩАЯ КАМЕРА
-    self.nextBtn = ISButton:new(160, bottomY, btnW, btnH, CCTV_i18n.NEXT_CAMERA, self, CCTV_UI.onNextCam)
+    self.nextBtn = ISButton:new(160, bottomY, btnW, btnH, "CCTV.NextCamera", self, CCTV_UI.onNextCam)
     self.nextBtn:initialise()
     self:addChild(self.nextBtn)
 
     -- ВЫХОД
-    self.closeBtn = ISButton:new(self.width - 150, bottomY, btnW, btnH, CCTV_i18n.DISCONNECT_FROM_CCTV, self, CCTV_UI.onClose)
+    self.closeBtn = ISButton:new(self.width - 150, bottomY, btnW, btnH, "CCTV.CloseCCTV", self, CCTV_UI.onClose)
     self.closeBtn:initialise()
     self:addChild(self.closeBtn)
 

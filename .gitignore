@@ -40,3 +40,9 @@ packages
 *.x86_64
 *.hex
 
+# JS\ts\node
+node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
