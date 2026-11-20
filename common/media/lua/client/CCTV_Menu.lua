@@ -1,10 +1,15 @@
 require "CCTV_i18n"
 
-local function onWatchCCTV(_, playerNum, tvX, tvY)
-    local availableCams = CCTV_Manager.getAvailableCameras(tvX, tvY)
+local function onWatchCCTV(_, playerNum, square)
+    if not square:haveElectricity() then
+        getSpecificPlayer(playerNum):Say("CCTV: " .. "CCTV.NoPower")
+        return
+    end
+
+    local availableCams = CCTV_Manager.getAvailableCameras(square:getX(), square:getY())
     
     if #availableCams == 0 then
-        getSpecificPlayer(playerNum):Say("CCTV: " .. CCTV_i18n.OUT_OF_RANGE)
+        getSpecificPlayer(playerNum):Say("CCTV: " .. "CCTV.OUT_OF_RANGE")
         return
     end
 
@@ -24,12 +29,11 @@ local function CCTV_OnFillWorldObjectContextMenu(playerNum, context, worldobject
             local square = obj:getSquare()
             if square then
                 context:addOption(
-                    CCTV_i18n.CONNECT_TO_CCTV,
+                    "CCTV.ConnectToCCTV",
                     worldobjects,
                     onWatchCCTV,
                     playerNum,
-                    square:getX(),
-                    square:getY()
+                    square
                 )
                 break
             end

@@ -48,24 +48,24 @@ local function placeDevice(playerNum, item, isCamera)
     if isCamera then
         -- Камеру можно вешать только на стену или забор
         if not hasAdjacentWallOrFence(square) then
-            player:Say(CCTV_i18n.CAMERA_NEEDS_WALL)
+            player:Say("CCTV.CAMERA_NEEDS_WALL")
             return
         end
 
         -- Не даём ставить камеры кучей в одном месте
         if CCTV_Manager.isCameraTooClose(x, y) then
-            player:Say(CCTV_i18n.CAMERA_TOO_CLOSE)
+            player:Say("CCTV.CAMERA_TOO_CLOSE")
             return
         end
 
         local id = CCTV_Manager.generateId(ItemType.Camera).id
         local camName = CCTV_i18n.CAMERA .. " " .. x .. ":" .. y
         CCTV_Manager.registerCamera(id, camName, x, y, z)
-        player:Say(CCTV_i18n.CAMERA_WAS_PLANTED .. ": " .. camName)
+        player:Say("CCTV.CAMERA_WAS_PLANTED" .. ": " .. camName)
     else
         local id = CCTV_Manager.generateId(ItemType.Repeater).id
         CCTV_Manager.registerRepeater(id, x, y, z)
-        player:Say(CCTV_i18n.REPEATER_WAS_PLANTED)
+        player:Say("CCTV.REPEATER_WAS_PLANTED")
     end
 
     -- Забираем предмет из инвентаря
@@ -86,11 +86,11 @@ local function CCTV_OnFillInventoryContextMenu(playerNum, context, items)
             local fullType = item:getFullType()
 
             if fullType == "CCTV.CameraItem" then
-                context:addOption(CCTV_i18n.SETUP_CAMERA, item, function()
+                context:addOption("CCTV.SetupCamera", item, function()
                     placeDevice(playerNum, item, true)
                 end)
             elseif fullType == "CCTV.RepeaterItem" then
-                context:addOption(CCTV_i18n.SETUP_REPEATER, item, function()
+                context:addOption("CCTV.SetupRepeater", item, function()
                     placeDevice(playerNum, item, false)
                 end)
             end
